@@ -7,7 +7,7 @@ RSpec::Core::RakeTask.new(:examples_specs) do |t|
 end
 
 require 'rubygems'
-require 'rake/gempackagetask' 
+require 'rubygems/package_task'
 
 spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
@@ -23,7 +23,7 @@ spec = Gem::Specification.new do |s|
   s.authors = 'Adam Scott'
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
 
