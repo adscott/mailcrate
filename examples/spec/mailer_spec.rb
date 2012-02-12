@@ -1,5 +1,5 @@
 require 'examples/app/mailer'
-require 'lib/mailbox'
+require 'lib/mailcrate'
 
 ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.delivery_method = :smtp
@@ -12,21 +12,21 @@ ActionMailer::Base.smtp_settings = {
 describe Mailer do
 
 	before do
-		@mailbox = Mailbox.new(2525)
-		@mailbox.start
+		@mailcrate = Mailcrate.new(2525)
+		@mailcrate.start
 	end
 
 	after do
-		@mailbox.stop
+		@mailcrate.stop
 	end
 
-	it 'should use Mailbox to send mails' do
+	it 'should use Mailcrate to send mails' do
 		mail = Mailer.welcome_email('a@b.com')
 		mail.deliver
 
-		@mailbox.mails[0][:from].should == '<from@example.com>'
-		@mailbox.mails[0][:to_list].should include '<a@b.com>'
-		@mailbox.mails[0][:body].should include 'Full of awesomeness.'
+		@mailcrate.mails[0][:from].should == '<from@example.com>'
+		@mailcrate.mails[0][:to_list].should include '<a@b.com>'
+		@mailcrate.mails[0][:body].should include 'Full of awesomeness.'
 	end
 
 end

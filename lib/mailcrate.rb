@@ -1,6 +1,6 @@
 require 'socket'
 
-class Mailbox
+class Mailcrate
 
 	attr_reader :mails
 
@@ -39,11 +39,11 @@ class Mailbox
   end
 
   def serve( connection )
-  	connection.puts( "220 localhost mailbox ready ESTMP" )
+  	connection.puts( "220 localhost mailcrate ready ESTMP" )
     helo = connection.get_line
     
     if helo =~ /^EHLO\s+/
-      connection.puts "250-localhost mailbox here"
+      connection.puts "250-localhost mailcrate here"
       connection.puts "250 HELP"
     end
 
