@@ -10,18 +10,18 @@ A mock SMTP server loosely based on [mailtrap](http://rubymatt.rubyforge.org/mai
 
 The constructor requires a single parameter, the port which it should listen on. 
 
-		require 'lib/mailcrate'
+	require 'lib/mailcrate'
 
-		mailcrate = Mailcrate.new(2525)
-		mailcrate.start
+	mailcrate = Mailcrate.new(2525)
+	mailcrate.start
 
-		Mailer.send_mail(:to => 'to@example.com', :from => 'from@example.com', :body => 'An important message.')
+	Mailer.send_mail(:to => 'to@example.com', :from => 'from@example.com', :body => 'An important message.')
 
-		mailcrate.mails[0][:from].should == 'from@example.com'
-		mailcrate.mails[0][:to_list].should include 'to@example.com'
-		mailcrate.mails[0][:body].should == 'An important message.'
+	mailcrate.mails[0][:from].should == 'from@example.com'
+	mailcrate.mails[0][:to_list].should include 'to@example.com'
+	mailcrate.mails[0][:body].should == 'An important message.'
 
-		mailcrate.stop
+	mailcrate.stop
 
 		
 
