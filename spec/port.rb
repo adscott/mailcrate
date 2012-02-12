@@ -23,4 +23,9 @@ class Port
 	  return false
   end
 end
+
+
+def port(port)
+  Port.new(port)
+end
 	
