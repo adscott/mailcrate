@@ -1,1 +1,1 @@
-rvm --create use 1.9.3-p0@mailbox
+rvm --create use 1.8.7-p352@mailbox
