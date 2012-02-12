@@ -47,13 +47,43 @@ describe Mailbox do
 			socket.puts('.')
 			socket.puts('QUIT')
 
-			while(@mailbox.mails.empty?) do
-				sleep(0.1)
-			end
-
+			@mailbox.mails.should eventually have(1).items
 			@mailbox.mails[0][:from].should == 'myaddress@mydomain.com'
+			@mailbox.mails[0][:to_list].should include 'somone@somedomain.com'
+			@mailbox.mails[0][:body].should == 'Hello Fred, can you call me?'
   	end
 
   end
 	
+end
+
+class Eventually
+  def initialize(delegate)
+    @delegate = delegate
+  end
+  
+  def matches?(target)
+    @target = target
+    
+    count = 0
+    until(@delegate.matches?(target)) do
+    	return false if count >= 10
+			sleep(0.1)
+			count += 1
+		end
+
+		true
+  end
+
+  def failure_message
+  	@delegate.failure_message
+  end
+
+  def negative_failure_message
+    @delegate.negative_failure_message
+  end
+end
+
+def eventually(delegate)
+	Eventually.new(delegate)
 end

@@ -80,8 +80,8 @@ class Mailbox
 
     @mails << { 
 	    :from => from.gsub(/MAIL FROM:\s*/, ''),
-	    # :to_list => to_list.map { |to| to.gsub( /RCPT TO:\s*/, "" ) }
-	    # :body => lines.join( "\n" ) 
+	    :to_list => to_list.map { |to| to.gsub( /RCPT TO:\s*/, "" ) },
+	    :body => lines.join( "\n" ) 
 	  }
   end
 
