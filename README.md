@@ -2,15 +2,19 @@
 
 by Adam Scott [http://adams.co.tt/](http://adams.co.tt/)
 
-#description
+##description
 
 A mock SMTP server loosely based on [mailtrap](http://rubymatt.rubyforge.org/mailtrap/) and [greenmail](http://www.icegreen.com/greenmail/), and can be used for automated testing. Like mailtrap, mailcrate listens on a chosen port and talks _just enough_ SMTP protocol for ActionMailer to successfully deliver a message. However, like greenmail, it is started, stopped and interogated from your test code.
 
-#usage
+##install
+
+  gem install mailcrate
+
+##usage
 
 The constructor requires a single parameter, the port which it should listen on. 
 
-	require 'lib/mailcrate'
+	require 'mailcrate'
 
 	mailcrate = Mailcrate.new(2525)
 	mailcrate.start
