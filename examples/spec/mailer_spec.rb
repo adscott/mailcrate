@@ -11,22 +11,22 @@ ActionMailer::Base.smtp_settings = {
 
 describe Mailer do
 
-	before do
-		@mailcrate = Mailcrate.new(2525)
-		@mailcrate.start
-	end
+  before do
+    @mailcrate = Mailcrate.new(2525)
+    @mailcrate.start
+  end
 
-	after do
-		@mailcrate.stop
-	end
+  after do
+    @mailcrate.stop
+  end
 
-	it 'should use Mailcrate to send mails' do
-		mail = Mailer.welcome_email('a@b.com')
-		mail.deliver
+  it 'should use Mailcrate to send mails' do
+    mail = Mailer.welcome_email('a@b.com')
+    mail.deliver
 
-		@mailcrate.mails[0][:from].should == '<from@example.com>'
-		@mailcrate.mails[0][:to_list].should include '<a@b.com>'
-		@mailcrate.mails[0][:body].should include 'Full of awesomeness.'
-	end
+    @mailcrate.mails[0][:from].should == '<from@example.com>'
+    @mailcrate.mails[0][:to_list].should include '<a@b.com>'
+    @mailcrate.mails[0][:body].should include 'Full of awesomeness.'
+  end
 
 end

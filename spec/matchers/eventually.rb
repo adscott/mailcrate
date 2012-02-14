@@ -8,16 +8,16 @@ class Eventually
     
     count = 0
     until(@delegate.matches?(target)) do
-    	return false if count >= 10
-			sleep(0.1)
-			count += 1
-		end
+      return false if count >= 10
+      sleep(0.1)
+      count += 1
+    end
 
-		true
+    true
   end
 
   def failure_message
-  	@delegate.failure_message
+    @delegate.failure_message
   end
 
   def negative_failure_message
@@ -26,5 +26,5 @@ class Eventually
 end
 
 def eventually(delegate)
-	Eventually.new(delegate)
+  Eventually.new(delegate)
 end
