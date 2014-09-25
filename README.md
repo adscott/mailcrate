@@ -27,7 +27,9 @@ The constructor requires a single parameter, the port which it should listen on.
 
 	mailcrate.stop
 
-		
+
+[![Build Status](https://travis-ci.org/adscott/mailcrate.png)](https://travis-ci.org/adscott/mailcrate)
+
 
 
 
