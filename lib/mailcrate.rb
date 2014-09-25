@@ -11,11 +11,12 @@ class Mailcrate
 
   def start(opts = {})
     @service = opts[:service] || TCPServer.new('localhost', @port)
-    Thread.new { accept(@service) }
+    @thread = Thread.new { accept(@service) }
   end
 
   def stop
-    @service.close unless @service.nil? || @service.closed? 
+    @service.close unless @service.nil? || @service.closed?
+    @thread.kill
   end
   
   private
