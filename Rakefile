@@ -13,7 +13,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary = 'A mock SMTP server that can be run and inspected from tests.'
   s.name = 'mailcrate'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.requirements << 'none'
   s.require_path = 'lib'
   s.files = 'lib/mailcrate.rb'
