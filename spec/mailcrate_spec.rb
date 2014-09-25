@@ -1,5 +1,6 @@
 require 'mailcrate'
 require 'port'
+require 'rspec/collection_matchers'
 require 'matchers/eventually'
 
 TEST_PORT = 8025
@@ -19,21 +20,21 @@ describe Mailcrate do
     it 'should open a port' do
       @mailcrate.start
 
-      port(TEST_PORT).should be_open
+      expect(port(TEST_PORT)).to be_open
     end
 
     it 'should close a port' do
       @mailcrate.start
       @mailcrate.stop
 
-      port(TEST_PORT).should_not be_open
+      expect(port(TEST_PORT)).to_not be_open
     end
 
     it 'should not allow a second server to be started on the same port'
   end
-  
+
   describe 'starting and stopping' do
-      
+
     it 'should block when start is called until SMTP server is ready' do
       slow_server = SlowTCPServer.new('localhost', TEST_PORT)
 
@@ -41,10 +42,10 @@ describe Mailcrate do
 
       socket = TCPSocket.open('localhost', TEST_PORT)
       welcome_message = socket.gets.chomp
-      
-      welcome_message.should == '220 localhost mailcrate ready ESTMP'
+
+      expect(welcome_message).to eq '220 localhost mailcrate ready ESTMP'
     end
-      
+
   end
 
   describe 'should accept SMTP traffic' do
@@ -61,14 +62,14 @@ describe Mailcrate do
       socket.puts('.')
       socket.puts('QUIT')
 
-      @mailcrate.mails.should eventually have(1).items
-      @mailcrate.mails[0][:from].should == 'myaddress@mydomain.com'
-      @mailcrate.mails[0][:to_list].should include 'somone@somedomain.com'
-      @mailcrate.mails[0][:body].should == 'Hello Fred, can you call me?'
+      expect(@mailcrate.mails).to eventually have(1).items
+      expect(@mailcrate.mails[0][:from]).to eq 'myaddress@mydomain.com'
+      expect(@mailcrate.mails[0][:to_list]).to include 'somone@somedomain.com'
+      expect(@mailcrate.mails[0][:body]).to eq 'Hello Fred, can you call me?'
     end
 
   end
-  
+
 end
 
 class SlowTCPServer < TCPServer

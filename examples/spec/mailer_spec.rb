@@ -1,5 +1,5 @@
-require 'examples/app/mailer'
-require 'lib/mailcrate'
+require './examples/app/mailer'
+require './lib/mailcrate'
 
 ActionMailer::Base.raise_delivery_errors = true
 ActionMailer::Base.delivery_method = :smtp
@@ -24,9 +24,9 @@ describe Mailer do
     mail = Mailer.welcome_email('a@b.com')
     mail.deliver
 
-    @mailcrate.mails[0][:from].should == '<from@example.com>'
-    @mailcrate.mails[0][:to_list].should include '<a@b.com>'
-    @mailcrate.mails[0][:body].should include 'Full of awesomeness.'
+    expect(@mailcrate.mails[0][:from]).to eq '<from@example.com>'
+    expect(@mailcrate.mails[0][:to_list]).to include '<a@b.com>'
+    expect(@mailcrate.mails[0][:body]).to include 'Full of awesomeness.'
   end
 
 end

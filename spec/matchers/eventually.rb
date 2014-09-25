@@ -2,10 +2,10 @@ class Eventually
   def initialize(delegate)
     @delegate = delegate
   end
-  
+
   def matches?(target)
     @target = target
-    
+
     count = 0
     until(@delegate.matches?(target)) do
       return false if count >= 10
@@ -20,8 +20,8 @@ class Eventually
     @delegate.failure_message
   end
 
-  def negative_failure_message
-    @delegate.negative_failure_message
+  def failure_message_when_negated
+    @delegate.failure_message_when_negated
   end
 end
 
