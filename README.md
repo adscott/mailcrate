@@ -2,7 +2,7 @@
 
 by Adam Scott [http://adams.co.tt/](http://adams.co.tt/)
 
-##description
+## Description
 
 A mock SMTP server loosely based on [mailtrap](http://rubymatt.rubyforge.org/mailtrap/) and [greenmail](http://www.icegreen.com/greenmail/), and can be used for automated testing. Like mailtrap, mailcrate listens on a chosen port and talks _just enough_ SMTP protocol for ActionMailer to successfully deliver a message. However, like greenmail, it is started, stopped and interogated from your test code.
 
@@ -30,3 +30,7 @@ mailcrate.mails[0][:body].should == 'An important message.'
 
 mailcrate.stop
 ```
+
+## Status
+
+[![Build Status](https://snap-ci.com/adscott/mailcrate/branch/master/build_image)](https://snap-ci.com/adscott/mailcrate/branch/master)
