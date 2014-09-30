@@ -8,16 +8,14 @@ class Mailcrate
 
   attr_reader :mails, :port
 
-  def initialize(port)
+  def initialize(port, options={})
+    raise Errno::EADDRINUSE if self.class.used_ports.include?(port)
+
+    self.class.used_ports << port
+    @service = options[:service] || TCPServer.new('localhost', port)
+    @thread = Thread.new { accept(@service) }
     @port = port
     @mails = []
-  end
-
-  def start(opts = {})
-    raise Errno::EADDRINUSE if self.class.used_ports.include?(@port)
-    self.class.used_ports << @port
-    @service = opts[:service] || TCPServer.new('localhost', @port)
-    @thread = Thread.new { accept(@service) }
   end
 
   def stop
