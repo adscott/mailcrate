@@ -2,7 +2,11 @@ require 'socket'
 
 class Mailcrate
 
-  attr_reader :mails
+  def self.used_ports
+    @used_ports ||= []
+  end
+
+  attr_reader :mails, :port
 
   def initialize(port)
     @port = port
@@ -10,11 +14,14 @@ class Mailcrate
   end
 
   def start(opts = {})
+    raise Errno::EADDRINUSE if self.class.used_ports.include?(@port)
+    self.class.used_ports << @port
     @service = opts[:service] || TCPServer.new('localhost', @port)
     @thread = Thread.new { accept(@service) }
   end
 
   def stop
+    self.class.used_ports.delete(@port)
     @service.close unless @service.nil? || @service.closed?
     @thread.kill
   end
@@ -78,7 +85,7 @@ class Mailcrate
     connection.puts "221 bye"
     connection.close
 
-    @mails << { 
+    @mails << {
       :from => from.gsub(/MAIL FROM:\s*/, ''),
       :to_list => to_list.map { |to| to.gsub( /RCPT TO:\s*/, "" ) },
       :body => lines.join( "\n" ) 
