@@ -1,6 +1,6 @@
 raise if ENV['SNAP_CI'] && File.basename(Dir.pwd) == "mailcrate" # TODO: disable snap ci ...
 
-Gem::Specification.new 'mailcrate', '0.0.3' do |s|
+Gem::Specification.new 'mailcrate', '0.0.4' do |s|
   s.summary = 'A mock SMTP server that can be run and inspected from tests.'
   s.description = 'A mock SMTP server that can be run and inspected from tests. The server runs in memory and received messages can be retrieved.'
   s.files = 'lib/mailcrate.rb'
