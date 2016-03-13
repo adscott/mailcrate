@@ -33,4 +33,4 @@ mailcrate.stop
 
 ## Status
 
-[![Build Status](https://snap-ci.com/adscott/mailcrate/branch/master/build_image)](https://snap-ci.com/adscott/mailcrate/branch/master)
+[![Build Status](https://travis-ci.org/adscott/mailcrate.svg?branch=master)](https://travis-ci.org/adscott/mailcrate)
