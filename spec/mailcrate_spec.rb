@@ -11,27 +11,22 @@ describe Mailcrate do
   after { mailcrate.stop }
 
   describe 'ports' do
-    it 'opens a port' do
-      mailcrate.start
+    before { mailcrate.start }
 
+    it 'opens a port' do
       expect(port(TEST_PORT)).to be_open
     end
 
     it 'can read the port' do
-      mailcrate.start # makes .stop not blow up
-
       expect(mailcrate.port).to eq TEST_PORT
     end
 
     it 'closes a port' do
-      mailcrate.start
       mailcrate.stop
-
       expect(port(TEST_PORT)).to_not be_open
     end
 
     it 'does not allow a second server to be started on the same port' do
-      mailcrate.start
       expect {
         Mailcrate.new(TEST_PORT).start
       }.to raise_error(Errno::EADDRINUSE)

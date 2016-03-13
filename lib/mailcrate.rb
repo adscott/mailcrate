@@ -22,8 +22,9 @@ class Mailcrate
 
   def stop
     self.class.used_ports.delete(@port)
+    @thread.kill unless @thread.nil?
+    @thread.join unless @thread.nil?
     @service.close unless @service.nil? || @service.closed?
-    @thread.kill
   end
 
   private
